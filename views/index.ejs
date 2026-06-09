@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <form action="/weather" method="post">
+            <label>Enter city name:</label>
+            <input type="text" name="city" required>
+            <button>Search</button>
+        </form>
+
+        <% if (typeof error !='undefined' ) { %>
+            <div class="weather-card">
+                <h3>
+                    <%= error %>
+                </h3>
+            </div>
+            <% } %>
+
+                <% if (weather) { %>
+                    <div class="weather-card">
+                        <p>City: <%= weather.name %>
+                        </p>
+                        <p>Country: <%= weather.sys.country %>
+                        </p>
+                        
+                        <img src="https://openweathermap.org/img/wn/<%= weather.weather[0].icon %>@2x.png"
+                        alt="Weather Icon">
+                        <p>Temp: <%= weather.main.temp %>°C</p>
+                        <p>Humidity: <%= weather.main.humidity %>%</p>
+                    </div>
+                    <% } %>
+    </div>
+</body>
+
+</html>
