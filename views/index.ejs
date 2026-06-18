@@ -25,21 +25,40 @@
                 </h3>
             </div>
             <% } %>
-
                 <% if (weather) { %>
                     <div class="weather-card">
-                        <p>City: <%= weather.name %>
+                        <h2>
+                            <%= weather.name %>, <%= weather.sys.country %>
+                        </h2>
+
+                        <img src="https://openweathermap.org/img/wn/<%= weather.weather[0].icon %>@4x.png"
+                            alt="Weather Icon">
+
+                        <h1 class="temp">
+                            <%= Math.round(weather.main.temp) %>°C
+                        </h1>
+
+                        <p class="condition">
+                            <%= weather.weather[0].main %>
                         </p>
-                        <p>Country: <%= weather.sys.country %>
-                        </p>
-                        
-                        <img src="https://openweathermap.org/img/wn/<%= weather.weather[0].icon %>@2x.png"
-                        alt="Weather Icon">
-                        <p>Temp: <%= weather.main.temp %>°C</p>
-                        <p>Humidity: <%= weather.main.humidity %>%</p>
+
+                        <div class="weather-details">
+                            <div>
+                                <span>Humidity</span>
+                                <strong>
+                                    <%= weather.main.humidity %>%
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>Wind</span>
+                                <strong>
+                                    <%= weather.wind.speed %> m/s
+                                </strong>
+                            </div>
+                        </div>
                     </div>
                     <% } %>
-    </div>
 </body>
 
 </html>
