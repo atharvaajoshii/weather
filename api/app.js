@@ -1,6 +1,9 @@
 const express = require("express")
 const app = express()
 const path = require("path");
+require("dotenv").config({
+    path: path.join(__dirname, ".env")
+});
 const axios = require('axios')
 
 app.set("view engine", "ejs")
@@ -16,7 +19,7 @@ app.get('/', (req, res) => {
 app.post('/weather', async (req, res) => {
     try {
         const city = req.body.city;
-        const apikey = "43cc5f6e914de109da40399f1326436c"
+        const apikey = process.env.apikey;
         const apiurl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`
         const result = await axios.get(apiurl)
         res.render("index",{weather:result.data})
@@ -29,7 +32,7 @@ app.post('/weather', async (req, res) => {
 }
 })
 
-app.listen(5002, () => {
-    console.log("runnung")
+app.listen(5000, () => {
+    console.log("Server is running on port 5000")
 })
-module.exports = app;
+// module.exports = app;
